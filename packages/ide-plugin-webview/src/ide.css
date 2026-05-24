@@ -1,0 +1,15 @@
+/*
+ * IDE-specific overrides.
+ *
+ * Most header controls (search, status, review, file tree) are rendered via
+ * Portal into #opencode-titlebar-* elements defined in titlebar.tsx. Since the
+ * IDE webview layout does not render the Titlebar component, those portal
+ * targets don't exist, and the controls naturally don't appear. The status
+ * popover and settings gear are instead rendered directly in the IDE webview
+ * header (entry.tsx).
+ */
+
+/* Hide mobile tab switcher in IDE mode (narrow viewport navigation) */
+.ide-webview [data-slot="tabs-list"] {
+  display: none !important;
+}

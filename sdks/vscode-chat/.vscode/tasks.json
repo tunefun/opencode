@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "dev-build",
+      "dependsOn": ["dev-build-extension"],
+      "problemMatcher": []
+    },
+    {
+      "label": "dev-build-extension",
+      "type": "shell",
+      "command": "node",
+      "args": ["esbuild.js"],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

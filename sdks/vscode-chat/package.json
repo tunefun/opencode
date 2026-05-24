@@ -1,0 +1,106 @@
+{
+  "name": "opencode-chat",
+  "displayName": "OpenCode Chat",
+  "description": "AI-powered chat assistant in VS Code",
+  "version": "1.15.10",
+  "publisher": "sst-dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anomalyco/opencode"
+  },
+  "license": "MIT",
+
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:opencode-chat.chatView"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "opencode-chat-sidebar",
+          "title": "OpenCode Chat",
+          "icon": "images/activitybar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "opencode-chat-sidebar": [
+        {
+          "type": "webview",
+          "id": "opencode-chat.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "opencode-chat.open",
+        "title": "Open OpenCode Chat"
+      },
+      {
+        "command": "opencode-chat.focus",
+        "title": "Focus OpenCode Chat Input"
+      },
+      {
+        "command": "opencode-chat.addSelection",
+        "title": "Add Selection to OpenCode Chat"
+      },
+      {
+        "command": "opencode-chat.addFile",
+        "title": "Add File to OpenCode Chat"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "opencode-chat.addSelection",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "opencode-chat.addFile",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "opencode-chat.focus",
+        "key": "ctrl+shift+o",
+        "mac": "cmd+shift+o"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "node esbuild.js --production",
+    "build": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run build:extension",
+    "build:webview": "cd ../../packages/ide-plugin-webview && bun run build",
+    "build:extension": "node esbuild.js --production",
+    "copy:webview": "node script/copy-webview.js",
+    "build:node-bundle": "cd ../../packages/opencode && bun script/build-node.ts",
+    "copy:node-bundle": "node script/copy-node-bundle.js",
+    "watch": "node esbuild.js --watch",
+    "typecheck": "tsc --noEmit",
+    "package": "node esbuild.js --production",
+    "vsix": "bun run build && npx @vscode/vsce package --no-dependencies",
+    "vsix:all": "node script/package-all.js",
+    "install": "node -e \"var p=require('./package.json');require('child_process').execSync('code --install-extension opencode-chat-'+p.version+'.vsix --force',{stdio:'inherit'})\"",
+    "dev": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run build:extension && node -e \"var s=require('child_process').spawn('code',['.'],{env:{...process.env,OPENCODE_DEV:'1'},stdio:'inherit',shell:true})\""
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.94.0",
+    "@types/node": "20.x",
+    "esbuild": "^0.25.3",
+    "typescript": "^5.8.3",
+    "jsonc-parser": "3.3.1"
+  }
+}

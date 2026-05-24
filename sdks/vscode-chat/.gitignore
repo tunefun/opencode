@@ -1,0 +1,4 @@
+webview/
+dist/node/
+dist/sidecar.js
+*.vsix
