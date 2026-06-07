@@ -1,0 +1,25 @@
+# Build output
+build/
+.gradle/
+.kotlin/
+out/
+
+# IDE
+.idea/
+*.iml
+
+# IntelliJ Platform cache
+.intellijPlatform/
+
+# Plugin package
+*.zip
+*.jar
+
+# Webview dist (copied from ide-plugin-webview)
+webview/
+src/main/resources/webview/
+
+# Binary (copied from opencode build)
+dist/bin/
+dist/node/
+dist/node-runtime/

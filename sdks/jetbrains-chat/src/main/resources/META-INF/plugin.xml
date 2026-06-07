@@ -1,0 +1,62 @@
+<idea-plugin>
+    <id>ai.opencode.jetbrains-chat</id>
+    <name>OpenCode Chat</name>
+    <vendor url="https://opencode.ai">OpenCode</vendor>
+
+    <description><![CDATA[
+        <h2>AI-Powered Coding Assistant for JetBrains IDEs</h2>
+        <p>OpenCode Chat brings an AI-powered chat panel directly into your JetBrains IDE,
+        enabling seamless interaction with your codebase through natural language.</p>
+
+        <h3>Features</h3>
+        <ul>
+            <li>Chat with AI about your code</li>
+            <li>Add files and selections to the conversation</li>
+            <li>Open files and navigate code from chat suggestions</li>
+            <li>Dark and light theme support</li>
+        </ul>
+
+        <h3>Usage</h3>
+        <p>Open the "OpenCode Chat" tool window from the right sidebar.
+        Use the context menu to add files or selections to the chat.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+            id="OpenCode Chat"
+            anchor="right"
+            icon="ai.opencode.jetbrains.OpenCodeIcons.ToolWindow"
+            factoryClass="ai.opencode.jetbrains.toolwindow.ChatToolWindowFactory"
+            canCloseContents="false" />
+
+        <applicationService
+            serviceImplementation="ai.opencode.jetbrains.services.OpenCodeServer" />
+    </extensions>
+
+    <actions>
+        <action
+            id="OpenCode.Focus"
+            class="ai.opencode.jetbrains.actions.FocusAction"
+            text="Focus OpenCode Chat"
+            description="Focus the OpenCode chat input" />
+
+
+        <action
+            id="OpenCode.AddSelection"
+            class="ai.opencode.jetbrains.actions.AddSelectionAction"
+            text="Add Selection to OpenCode"
+            description="Add the current editor selection to the OpenCode chat">
+            <add-to-group group-id="EditorPopupMenu" anchor="first" />
+        </action>
+
+        <action
+            id="OpenCode.AddFile"
+            class="ai.opencode.jetbrains.actions.AddFileAction"
+            text="Add File to OpenCode"
+            description="Add the selected file to the OpenCode chat">
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first" />
+        </action>
+    </actions>
+</idea-plugin>
