@@ -1,0 +1,8 @@
+{
+  "name": "opencode-company",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  }
+}

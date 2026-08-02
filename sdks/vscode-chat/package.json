@@ -82,7 +82,8 @@
   },
   "scripts": {
     "vscode:prepublish": "node esbuild.js --production",
-    "build": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run build:extension",
+    "build": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run copy:company && bun run build:extension",
+    "copy:company": "node script/copy-company.js",
     "build:webview": "cd ../../packages/ide-plugin-webview && bun run build",
     "build:extension": "node esbuild.js --production",
     "copy:webview": "node script/copy-webview.js",
@@ -94,7 +95,7 @@
     "vsix": "bun run build && npx @vscode/vsce package --no-dependencies",
     "vsix:all": "node script/package-all.js",
     "install": "node -e \"var p=require('./package.json');require('child_process').execSync('code --install-extension opencode-chat-'+p.version+'.vsix --force',{stdio:'inherit'})\"",
-    "dev": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run build:extension && node -e \"var s=require('child_process').spawn('code',['.'],{env:{...process.env,OPENCODE_DEV:'1'},stdio:'inherit',shell:true})\""
+    "dev": "bun run build:webview && bun run copy:webview && bun run build:node-bundle && bun run copy:node-bundle && bun run copy:company && bun run build:extension && node -e \"var s=require('child_process').spawn('code',['.'],{env:{...process.env,OPENCODE_DEV:'1'},stdio:'inherit',shell:true})\""
   },
   "devDependencies": {
     "@types/vscode": "^1.94.0",

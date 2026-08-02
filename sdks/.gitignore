@@ -1,0 +1,4 @@
+company/.build/
+company/node_modules/
+company/plugins/node_modules/
+company/plugins/*/node_modules/

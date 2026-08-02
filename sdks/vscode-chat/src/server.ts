@@ -87,9 +87,13 @@ export async function startServer(directory: string): Promise<ServerHandle> {
   const sidecarPath = findSidecar()
   outputChannel.appendLine(`Starting sidecar: ${sidecarPath}`)
 
+  const pluginDir = __dirname.replace(/\\/g, "/")
+
   const proc = fork(sidecarPath, [], {
     env: {
       ...process.env,
+      OPENCODE_CONFIG: path.join(pluginDir, "company/opencode.jsonc"),
+      OPENCODE_COMPANY_PLUGIN_DIR: pluginDir,
       OPENCODE_CALLER: "vscode-chat",
       OPENCODE_PORT: String(port),
       OPENCODE_HOSTNAME: "127.0.0.1",

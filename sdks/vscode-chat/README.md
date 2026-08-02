@@ -59,13 +59,23 @@ bun run typecheck
 2. `copy:webview` — 把 `packages/ide-plugin-webview/dist/` 复制到 `webview/`。
 3. `build:node-bundle` — 构建 OpenCode Node.js 服务（`packages/opencode/dist/node`）。
 4. `copy:node-bundle` — 把 bundle 复制到 `dist/node/`，连同 `script/sidecar.js` → `dist/sidecar.js`，并 stub 掉 `@lydell/node-pty`（扩展内部不可用）。
-5. `build:extension` — 用 esbuild 把 `src/extension.ts` 打包为 `dist/extension.js`。
+5. `copy:company` — 把 `../../company/`（公司内置配置）复制到 `dist/company/`。
+6. `build:extension` — 用 esbuild 把 `src/extension.ts` 打包为 `dist/extension.js`。
 
 安装打包好的 `.vsix`：
 
 ```bash
 bun run install
 ```
+
+## 公司级配置分发
+
+插件把公司级配置打进 `dist/company/`（构建时由 `copy:company` 从 `sdks/company/` 复制），sidecar 启动时注入（`src/server.ts`）：
+
+- `OPENCODE_CONFIG=dist/company/opencode.jsonc` — **内置优先**，覆盖机器级 `OPENCODE_CONFIG`
+- `OPENCODE_COMPANY_PLUGIN_DIR=dist` — 供配置用 `{env:OPENCODE_COMPANY_PLUGIN_DIR}` 引用插件目录
+
+定制公司配置（默认模型 / 内置插件 / 技能）请编辑 `../../company/`（见其 README），然后重新 `bun run build && bun run vsix` 分发。优先级：公司配置介于用户全局配置与项目配置之间，员工仍可在项目 `.opencode/` 覆盖。
 
 ## 开发
 

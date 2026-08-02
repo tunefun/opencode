@@ -1,0 +1,12 @@
+{
+  "name": "@corp/opencode-plugin-audit",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "bun build src/index.ts --outfile \"$OUTDIR/index.js\" --target node --format esm"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}

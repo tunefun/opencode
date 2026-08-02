@@ -57,6 +57,9 @@ public class OpenCodeServer {
         try {
             ProcessBuilder pb = new ProcessBuilder(cmd)
                 .directory(new File(workspaceDir));
+            String pluginDir = resolvePluginDir().replace('\\', '/');
+            pb.environment().put("OPENCODE_CONFIG", pluginDir + "/company/opencode.jsonc");
+            pb.environment().put("OPENCODE_COMPANY_PLUGIN_DIR", pluginDir);
             pb.environment().put("OPENCODE_CALLER", "jetbrains-chat");
             pb.environment().put("OPENCODE_PORT", String.valueOf(port));
             pb.environment().put("OPENCODE_HOSTNAME", "127.0.0.1");

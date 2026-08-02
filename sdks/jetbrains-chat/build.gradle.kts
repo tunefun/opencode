@@ -91,6 +91,21 @@ tasks.register("syncNodeBundle") {
     }
 }
 
+tasks.register("syncCompany") {
+    doLast {
+        val script = file("../company/build.mjs")
+        val staging = file("../company/.build")
+        val dst = file("dist/company")
+        val proc = ProcessBuilder("node", script.absolutePath).inheritIO().start()
+        if (proc.waitFor() != 0) throw GradleException("Failed to prepare company bundle")
+        dst.deleteRecursively()
+        copy {
+            from(staging)
+            into(dst)
+        }
+    }
+}
+
 val nodeRuntimeVersion = "v24.18.1"
 
 data class NodeRuntimeTarget(val dir: String, val archive: String, val binaryPath: String, val binaryName: String)
@@ -225,7 +240,7 @@ fun findLocalNode(exeName: String): File? {
 }
 
 tasks.named("prepareSandbox") {
-    dependsOn("syncNodeBundle", "syncNodeRuntime")
+    dependsOn("syncNodeBundle", "syncNodeRuntime", "syncCompany")
     doLast {
         val nodeDir = file("dist/node")
         if (nodeDir.exists()) {
@@ -246,6 +261,13 @@ tasks.named("prepareSandbox") {
             copy {
                 from(sidecar)
                 into("${layout.buildDirectory.get()}/idea-sandbox/IC-2024.3/plugins/${project.name}/dist")
+            }
+        }
+        val companyDir = file("dist/company")
+        if (companyDir.exists()) {
+            copy {
+                from(companyDir)
+                into("${layout.buildDirectory.get()}/idea-sandbox/IC-2024.3/plugins/${project.name}/company")
             }
         }
     }

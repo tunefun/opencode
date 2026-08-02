@@ -72,7 +72,8 @@ cd sdks/jetbrains-chat
 | `syncWebview` | 把 `packages/ide-plugin-webview/dist/` 复制到 `src/main/resources/webview/` |
 | `syncNodeBundle` | 把 `packages/opencode/dist/node/` 复制到 `dist/node/`，写入 `sidecar.cjs`，并 stub 掉 `@lydell/node-pty` |
 | `syncNodeRuntime` | 为 win32/darwin/linux × x64/arm64 下载并解压 Node.js 运行时（`v24.18.1`）到 `dist/node-runtime/`；当前平台失败时回退使用本机 Node |
-| `prepareSandbox` | 把 node bundle 和运行时复制进 IDE 沙箱 |
+| `syncCompany` | 把 `../../company/`（公司内置配置）复制到 `dist/company/` |
+| `prepareSandbox` | 把 node bundle、运行时和公司配置复制进 IDE 沙箱 |
 
 `processResources` 依赖 `syncWebview`，因此构建时 Webview 资源始终是最新的。
 
@@ -83,6 +84,15 @@ cd sdks/jetbrains-chat
 # 产物位于 build/distributions/<plugin>.zip —— 可通过
 # Settings → Plugins → ⚙ → Install Plugin from Disk... 安装
 ```
+
+## 公司级配置分发
+
+插件把公司级配置打进 `company/`（构建时由 `syncCompany` 从 `../../company/` 复制，`prepareSandbox` 拷进插件目录），sidecar 启动时注入（`OpenCodeServer.java`）：
+
+- `OPENCODE_CONFIG=<插件目录>/company/opencode.jsonc` — **内置优先**，覆盖机器级 `OPENCODE_CONFIG`
+- `OPENCODE_COMPANY_PLUGIN_DIR=<插件目录>` — 供配置用 `{env:OPENCODE_COMPANY_PLUGIN_DIR}` 引用插件目录
+
+定制公司配置（默认模型 / 内置插件 / 技能）请编辑 `../../company/`（见其 README），然后重新 `./gradlew buildPlugin` 分发。优先级：公司配置介于用户全局配置与项目配置之间，员工仍可在项目 `.opencode/` 覆盖。
 
 ## 开发
 
