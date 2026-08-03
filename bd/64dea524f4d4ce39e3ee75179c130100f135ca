@@ -1,0 +1,24 @@
+sdks/jetbrains-chat/src/sidecar/sidecar.cjs
+  s_3eaa4b663e96b8::t_33a9862d02e6d6 1-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "bd64dea524f4d4ce39e3ee75179c130100f135ca",
+  "prompts": {},
+  "humans": {
+    "h_ee7b702f691b42": {
+      "author": "l00464476 <lishengji2@huawei.com>"
+    }
+  },
+  "sessions": {
+    "s_3eaa4b663e96b8": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_038b595b7ffe4l1T7RlgcBM2RU",
+        "model": "unknown"
+      },
+      "human_author": "l00464476 <lishengji2@huawei.com>"
+    }
+  }
+}
