@@ -1,0 +1,37 @@
+packages/ide-plugin-webview/src/connect-prompt.tsx
+  s_9eb0734af2f7fa::t_244f2a48bb5715 45-51
+  s_9eb0734af2f7fa::t_c6a55d022826b1 75
+  s_9eb0734af2f7fa::t_119f3f295476a3 17-19
+  s_9eb0734af2f7fa::t_fbae52feee06e2 2,7-12,15-16,32,59-66,68-73,84-90
+  s_9eb0734af2f7fa::t_34a336d9e620b7 76-81
+  s_9eb0734af2f7fa::t_c233f987d34a84 74,82
+  s_9eb0734af2f7fa::t_fad893b221a959 1,3,5,13,20-21,34-36,43,67,83
+  s_9eb0734af2f7fa::t_6693521375d370 6
+  s_9eb0734af2f7fa::t_013ed5f68502aa 22-30
+  s_9eb0734af2f7fa::t_08fac3eb8ef5bc 52-58
+  s_9eb0734af2f7fa::t_030305b1c3e15f 4
+  s_9eb0734af2f7fa::t_24402ad1923220 14,44
+  s_9eb0734af2f7fa::t_c4775d2bf5487c 37-42
+  s_9eb0734af2f7fa::t_cef40ae74f756d 31,33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "aaefeb3e0d34b4ef7ce452c1d4f394103e2a0b82",
+  "prompts": {},
+  "humans": {
+    "h_ee7b702f691b42": {
+      "author": "l00464476 <lishengji2@huawei.com>"
+    }
+  },
+  "sessions": {
+    "s_9eb0734af2f7fa": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_03ace918affeW9P9NJZHZQEx7g",
+        "model": "unknown"
+      },
+      "human_author": "l00464476 <lishengji2@huawei.com>"
+    }
+  }
+}
