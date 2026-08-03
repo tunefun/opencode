@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.6",
+  "base_commit_sha": "3e29f90191edab8a5d972e219e13c46feeb7c7b2",
+  "prompts": {},
+  "humans": {
+    "h_ee7b702f691b42": {
+      "author": "l00464476 <lishengji2@huawei.com>"
+    }
+  }
+}
